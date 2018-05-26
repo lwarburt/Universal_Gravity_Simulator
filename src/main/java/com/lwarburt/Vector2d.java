@@ -23,7 +23,10 @@ public class Vector2d{
     public void setCartesian(double i, double j) {
         this.i = i;
         this.j = j;
+    }
 
+    public double getMagnitude() {
+        return Math.sqrt((Math.pow(this.i, 2)) + Math.pow(this.j, 2));      //Distance formula
     }
 
     public void add(Vector2d addend){
