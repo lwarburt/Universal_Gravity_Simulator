@@ -1,9 +1,6 @@
 package com.lwarburt;
 
-import java.lang.Math;
-
 public class Vector2d{
-
 
     private double i;
     private double j;
@@ -21,6 +18,12 @@ public class Vector2d{
     public void setAngle(double magnitude, float directionDegrees){
         this.j = magnitude * Math.sin((double) directionDegrees);
         this.i = magnitude * Math.cos((double) directionDegrees);
+    }
+
+    public void setCartesian(double i, double j) {
+        this.i = i;
+        this.j = j;
+
     }
 
     public void add(Vector2d addend){
