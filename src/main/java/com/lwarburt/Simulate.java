@@ -55,8 +55,8 @@ public class Simulate {
         velocity.scale(1 / deltaT);
     }
 
-    public double findCenter() {
-        return Math.atan2((float) (0 - yPos), (float) (0 - xPos));
+    public static boolean isAlmost(double a, double b, double acceptance) {         //Static Tolerance checker
+        return Math.abs(a - b) <= acceptance;
     }
 
     public double getxPos() {
@@ -93,5 +93,9 @@ public class Simulate {
 
     public void setBodyMass(double bodyMass) {
         this.bodyMass = bodyMass;
+    }
+
+    private double findCenter() {
+        return Math.atan2((float) (0 - yPos), (float) (0 - xPos));
     }
 }
