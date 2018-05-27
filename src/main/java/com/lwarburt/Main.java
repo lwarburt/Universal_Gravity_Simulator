@@ -51,16 +51,17 @@ public class Main extends PApplet {
                 double yPix = sim.getyPos() * yScale + Y_RES / 2;
                 ellipse((float) xPix, (float) yPix, 3, 3);
 
-                if (sim.isAlmost(sim.getxPos(), 0, 10000) && !sim.isAlmost(sim.getyPos(), initialYPos - BODY_RADIUS, 10000)) {
+                if (sim.samePoint(initialYPos, BODY_RADIUS)) {
                     apsis = sim.getyPos();
                 }
 
                 if (sim.getDistance() < BODY_RADIUS) {
-                    System.out.printf("The object hit the Celestial body with a final velocity of :%f \n", sim.getVelocity().getMagnitude());
+                    double mag = sim.getVelocity().getMagnitude();
+                    System.out.printf("The object hit the Celestial body with a final velocity of :%f \n", mag);
                     apsis = 0;
                     break;
                 }
-                if (sim.isAlmost(sim.getxPos(), 0, 10000) && (sim.isAlmost(sim.getyPos(), initialYPos - BODY_RADIUS, 100000)) && i > 5000) {
+                if (sim.samePoint(initialYPos, BODY_RADIUS) && i > 5000) {
                     System.out.println("The object successfully orbits");
                     //if (apsis != 0){
                     //double eccent = Math.abs(initialYPos - apsis + BODY_RADIUS)/((initialYPos - BODY_RADIUS)+ (apsis- BODY_RADIUS));

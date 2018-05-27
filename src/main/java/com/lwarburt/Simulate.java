@@ -98,4 +98,8 @@ public class Simulate {
     private double findCenter() {
         return Math.atan2((float) (0 - yPos), (float) (0 - xPos));
     }
+
+    public boolean samePoint(double yPosI, double radius) {
+        return isAlmost(getxPos(), 0, 10000) && (isAlmost(getyPos(), yPosI - radius, 100000));
+    }
 }
