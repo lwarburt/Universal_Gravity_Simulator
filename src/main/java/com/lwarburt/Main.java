@@ -14,7 +14,6 @@ public class Main extends PApplet {
     private static final int Y_RES = 1500;
     private static double xScale = X_RES/X_MAX;
     private static double yScale = Y_RES/Y_MAX;
-
     private static double radius = CelestialBodies.EARTH.radius;
     private static Simulate sim = new Simulate();
 
@@ -29,8 +28,8 @@ public class Main extends PApplet {
 
     @Override
     public void draw() {
-        background(40, 40, 40);
         noLoop();
+        background(40, 40, 40);
         fill(0, 153, 51);
         ellipse(width / 2, height / 2, (float) radius * (float) xScale * 2, (float) radius * (float) yScale * 2);
         noFill();
@@ -47,16 +46,19 @@ public class Main extends PApplet {
             sim.setVelocity(velocity);                              //sets simulation initial velocity
             sim.setyPos(initialYPos - radius);                      //Resets Y Position
             sim.setxPos(0);                                         //Resets X Position
+
             for (int i = 0; i <= T_MAX / DELTA_T; i++) {
                 sim.simulate();                                     //Simulates motion by one time step
                 double xPix = sim.getxPos() * xScale + X_RES / 2;   //Plots x,y points -- To own method?
                 double yPix = sim.getyPos() * yScale + Y_RES / 2;
                 stroke(232, 232, 232);
                 ellipse((float) xPix, (float) yPix, 2, 2);      //Points being plotted
+
                 if (i % 1500 == 0) {
                     fill(240, 240, 240);
                     ellipse((float) xPix, (float) yPix, 10, 10);
                 }
+
                 if (sim.endOrbit(initialYPos, i)) {                   //Tests if/how the orbit should end
                     System.out.printf(" in %f minutes \n", i * DELTA_T / 60);
                     break;

@@ -61,7 +61,7 @@ public class Simulate {
 
         if (getDistance() < radius) {
             double mag = getVelocity().getMagnitude();
-            System.out.printf("The object hit the Celestial body with a final velocity of :%f", mag);
+            System.out.printf("The object hit the Celestial body with a final velocity of :%f m/sec", mag);
             apsis = 0;
             return true;
         }
