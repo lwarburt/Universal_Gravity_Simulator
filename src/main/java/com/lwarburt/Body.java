@@ -19,7 +19,7 @@ public class Body {
 
     public double getWindow() {
 
-        return radius * 8.5;
+        return radius * 10;
     }
 
     public double getMass() {

@@ -18,6 +18,7 @@ public class Testing extends PApplet {
     private static double yScale = Y_RES / Y_MAX;
     private static double radius = CelestialBodies.EARTH.radius;
     private static Simulate sim = new Simulate();
+    private static List<Point> points = new ArrayList<>();
 
     public static void main(String[] args) {
         PApplet.main("com.lwarburt.Testing");
@@ -31,9 +32,8 @@ public class Testing extends PApplet {
     @Override
     public void draw() {
         noLoop();
-        //background(40, 40, 40);
-        background(200, 200, 200);
-        fill(0, 153, 51);
+        background(40, 40, 40);
+        fill(CelestialBodies.EARTH.getR(), CelestialBodies.EARTH.getG(), CelestialBodies.EARTH.getB());
         ellipse(width / 2, height / 2, (float) radius * (float) xScale * 2, (float) radius * (float) yScale * 2);
         noFill();
         Scanner s = new Scanner(System.in);                                               //Here comes the Disco
@@ -44,8 +44,7 @@ public class Testing extends PApplet {
         sim.setDeltaT(DELTA_T);
         double max = 0;
         double min = 0;
-        List<Point> points = new ArrayList<>();
-        Point p = new Point(0, 0, 0);
+
 
         for (int n = 0; n <= 0; n++) {
             System.out.print("Initial horizontal velocity (m/sec): ");
@@ -57,8 +56,8 @@ public class Testing extends PApplet {
                 sim.simulate();                                     //Simulates motion by one time step
                 double xPix = sim.getxPos() * xScale + X_RES / 2;   //Plots x,y points -- To own method?
                 double yPix = sim.getyPos() * yScale + Y_RES / 2;
-                p.set(xPix, yPix, sim.getVelocity().getMagnitude());
-                points.add(p);
+                Point p = new Point(xPix, yPix, sim.getVelocity().getMagnitude());
+                points.add(i, p);
                 if (sim.getVelocity().getMagnitude() >= max) {
                     max = sim.getVelocity().getMagnitude();
                 }
@@ -70,12 +69,10 @@ public class Testing extends PApplet {
                     break;
                 }
             }
-
         }
         for (int i = 0; i <= points.size() - 1; i++) {
-            stroke(lerpColor(0xff0000, 0x0000ff, (float) (((points.get(i).getMag()) - min) / max)));
-            fill(lerpColor(0xff0000, 0x0000ff, (float) (((points.get(i).getMag()) - min) / max)));
-            ellipse((float) points.get(i).getX(), (float) points.get(i).getY(), 5, 5);
+            stroke(lerpColor(color(0, 0, 255), color(255, 0, 0), (float) ((points.get(i).getMag() - min) / max)));
+            ellipse((float) points.get(i).getX(), (float) points.get(i).getY(), 3, 3);
         }
     }
 }
